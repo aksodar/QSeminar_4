@@ -11,20 +11,20 @@ public class TaskService {
         this.arrayList = new ArrayList<>();
     }
 
-    public void createTask(int id, String summary) throws IllegalAccessException {
+    public void createTask(int id, String summary) throws IllegalStateException {
         if(summary == null || summary.isEmpty()){
-            throw new IllegalAccessException("Входные данные не валидны");
+            throw new IllegalStateException("Входные данные не валидны");
         }
         arrayList.add(new Task(id, summary));
     }
 
-    public Task getTask(String summary) throws IllegalAccessException {
+    public Task getTask(String summary) throws IllegalStateException {
         for (Task n: arrayList) {
             if(summary.equalsIgnoreCase(n.summary)) {
                 return n;
             }
         }
-        throw new IllegalAccessException("Задачи не найдены");
+        throw new IllegalStateException("Задачи не найдены");
     }
 
     public ArrayList<Task> getTasksForDeveloping() {
