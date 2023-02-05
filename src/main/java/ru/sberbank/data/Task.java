@@ -8,8 +8,6 @@ public class Task {
 
     public Task(int id, String summary) {
         this.id = id;
-        this.isDeveloped = false;
-        this.isTested = false;
         this.summary = summary;
     }
 
