@@ -3,38 +3,37 @@ package ru.sberbank.service;
 import ru.sberbank.data.Developer;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-public class DeveloperService {
-    public ArrayList<Developer> list;
+public class DeveloperService extends AbstractStorage<Developer> implements DataService<Developer> {
 
-    public DeveloperService() {
-        this.list = new ArrayList<>();
-    }
-
-    public void createDeveloper(int id, String firstName, String secondName) throws IllegalStateException {
-        if((firstName == null || firstName.isEmpty()) || (secondName == null || secondName.isEmpty())) {
-            throw new IllegalStateException("Входные данные не валидны");
+    @Override
+    public Developer create(int id, String firstName, String secondName) {
+        if ((firstName == null || firstName.isEmpty()) || (secondName == null || secondName.isEmpty())) {
+            throw new IllegalStateException("Developer is not created");
         }
-        list.add(new Developer(id, firstName, secondName));
+        Developer dev = new Developer(id, firstName, secondName);
+        list.add(dev);
+        return dev;
     }
 
-    public Developer getDeveloper(String firstName, String secondName) throws IllegalStateException {
-        for (Developer t: list)  {
-            if(firstName.equalsIgnoreCase(t.firstName) && secondName.equalsIgnoreCase(t.secondName)) {
-                return t;
-            }
-        }
-        throw new IllegalStateException("Разработчики не найдены");
+    @Override
+    public Developer get(String firstName, String secondName) {
+        return list
+                .stream()
+                .filter(
+                        dev -> firstName.equalsIgnoreCase(dev.getFirstName()) &&
+                               secondName.equalsIgnoreCase(dev.getSecondName())
+                )
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Developer is not found"));
     }
 
-    public ArrayList<Developer> getFreeDevelopers() {
-        ArrayList<Developer> freeTester = new ArrayList<>();
-        for (Developer n: list) {
-            if(n.isFree) {
-                freeTester.add(n);
-            }
-        }
-        return freeTester;
+    @Override
+    public List<Developer> getListOfFree() {
+        return list.stream()
+                   .filter(Developer::isFree)
+                   .collect(Collectors.toList());
     }
-
 }

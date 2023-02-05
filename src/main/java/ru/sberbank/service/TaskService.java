@@ -3,38 +3,41 @@ package ru.sberbank.service;
 import ru.sberbank.data.Task;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskService {
-    ArrayList<Task> arrayList;
+    List<Task> taskList;
 
     public TaskService() {
-        this.arrayList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
     }
 
-    public void createTask(int id, String summary) throws IllegalStateException {
-        if(summary == null || summary.isEmpty()){
-            throw new IllegalStateException("Входные данные не валидны");
+    public boolean createTask(int id, String summary) {
+        if (summary == null || summary.isEmpty()) {
+            throw new IllegalStateException("Task isn't created");
         }
-        arrayList.add(new Task(id, summary));
+        return taskList.add(new Task(id, summary));
     }
 
-    public Task getTask(String summary) throws IllegalStateException {
-        for (Task n: arrayList) {
-            if(summary.equalsIgnoreCase(n.summary)) {
-                return n;
-            }
-        }
-        throw new IllegalStateException("Задачи не найдены");
+    public Task getTask(String summary) {
+        return taskList.stream()
+                       .filter(task -> summary.equalsIgnoreCase(task.getSummary()))
+                       .findFirst()
+                       .orElseThrow(() -> new IllegalStateException("Task is not found"));
+
     }
 
-    public ArrayList<Task> getTasksForDeveloping() {
-        ArrayList<Task> list = new ArrayList<>();
-        for (Task n: arrayList) {
-            if(!n.isDeveloped) {
-                list.add(n);
-            }
-        }
-        return list;
+    public List<Task> getTasksForDeveloping() {
+        return taskList.stream()
+                       .filter(taks -> !taks.isDeveloped())
+                       .collect(Collectors.toList());
     }
 
+    public Task getTaskById(int id) {
+        return taskList.stream()
+                       .filter(task -> task.getId() == id)
+                       .findFirst()
+                       .orElseThrow(() -> new IllegalStateException("Task is with id = " + id + " not found"));
+    }
 }
