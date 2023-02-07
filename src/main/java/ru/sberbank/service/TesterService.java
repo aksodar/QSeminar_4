@@ -38,4 +38,13 @@ public class TesterService extends AbstractStorage<Tester> implements DataServic
         }
         return freeTester;
     }
+
+    public Tester getById(int my_id) {
+        for (Tester t: list)  {
+            if(t.id == my_id) {
+                return t;
+            }
+        }
+        throw new IllegalStateException("Разработчик не найден!");
+    }
 }

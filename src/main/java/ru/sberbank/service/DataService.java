@@ -8,4 +8,5 @@ public interface DataService<T extends TeamMember> {
     boolean create(int id, String firstName, String secondName);
     T get(String firstName, String secondName);
     ArrayList<T> getListOfFree();
+    T getById(int id);
 }

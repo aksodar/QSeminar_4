@@ -39,4 +39,12 @@ public class DeveloperService extends AbstractStorage<Developer> implements Data
         return freeDeveloper;
     }
 
+    public Developer getById(int my_id) {
+        for (Developer t: list)  {
+            if(t.id == my_id) {
+                return t;
+            }
+        }
+        throw new IllegalStateException("Разработчик не найден!");
+    }
 }

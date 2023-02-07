@@ -17,6 +17,6 @@ public abstract class AbstractStorage<T extends TeamMember> {
     }
 
     public AbstractStorage() {
-        this.list = new ArrayList<>();
+        this.list = new ArrayList<T>();
     }
 }
