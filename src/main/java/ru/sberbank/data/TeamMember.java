@@ -95,4 +95,15 @@ public abstract class TeamMember {
         result = 31 * result + secondName.hashCode();
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "TeamMember{" +
+               "currentTask=" + currentTask +
+               ", id=" + id +
+               ", isFree=" + isFree +
+               ", firstName='" + firstName + '\'' +
+               ", secondName='" + secondName + '\'' +
+               '}';
+    }
 }

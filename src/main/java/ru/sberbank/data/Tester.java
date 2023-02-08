@@ -9,7 +9,7 @@ public class Tester extends TeamMember{
     //IDEA почему-то криво в этом месте генерирует переопределние toString, сделал костыльно руками
     @Override
     public String toString() {
-        return "Tester{id = " + this.getId() + ", firstName = " + this.getFirstName() + ", secondName = " + this.getSecondName();
+        return super.toString();
     }
 
     public Task checkTask() {
@@ -17,7 +17,6 @@ public class Tester extends TeamMember{
             this.getCurrentTask().isTested = true;
         }
         return getCurrentTask();
-
 
     }
 

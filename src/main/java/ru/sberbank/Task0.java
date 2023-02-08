@@ -15,17 +15,19 @@ public class Task0 {
         System.out.println(tester1.getFirstName());
         System.out.println(tester1.getSecondName());
         TesterService tester = new TesterService();
-        tester.createTester(2, "Petr", "Petrov");
-        System.out.println(tester.getTester("Petr", "Petrov"));
-        System.out.println(tester.getFreeTesters());
+        tester.create(2, "Petr", "Petrov");
+        System.out.println(tester.get("Petr", "Petrov"));
+        System.out.println(tester.getListOfFree());
+        System.out.println(tester.get(2));
 
         Developer dev = new Developer(1, "Vasya", "Vasiliev");
         System.out.println(dev.getId());
         System.out.println(dev.getFirstName());
         System.out.println(dev.getSecondName());
         DeveloperService dev1 = new DeveloperService();
-        dev1.createDeveloper(2, "Petr", "Petrov");
-        System.out.println(dev1.getDeveloper("Petr", "Petrov"));
-        System.out.println(dev1.getFreeDevelopers());
+        dev1.create(2, "Petr", "Petrov");
+        System.out.println(dev1.get("Petr", "Petrov"));
+        System.out.println(dev1.getListOfFree());
+        System.out.println(dev1.get(2));
     }
 }

@@ -19,6 +19,6 @@ public class Developer extends TeamMember{
     //IDEA почему-то криво в этом месте генерирует переопределние toString, сделал костыльно руками
     @Override
     public String toString() {
-        return "Developer{id = " + this.getId() + ", firstName = " + this.getFirstName() + ", secondName = " + this.getSecondName();
+        return super.toString();
     }
 }
