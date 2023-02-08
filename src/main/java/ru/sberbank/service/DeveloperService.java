@@ -1,6 +1,7 @@
 package ru.sberbank.service;
 
 import ru.sberbank.data.Developer;
+import ru.sberbank.data.Tester;
 
 import java.util.ArrayList;
 
@@ -26,6 +27,16 @@ public class DeveloperService extends AbstractStorage<Developer> implements Data
             }
         }
         throw new IllegalStateException("Разработчики не найдены");
+    }
+
+    @Override
+    public Developer get(int id) {
+        for(Developer developer: list){
+            if(id == developer.getId()){
+                return developer;
+            }
+        }
+        throw new IllegalArgumentException("Не найдено ни одной записи Tester с Id " + id);
     }
 
     @Override

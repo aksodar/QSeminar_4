@@ -29,6 +29,16 @@ public class TesterService extends AbstractStorage<Tester> implements DataServic
     }
 
     @Override
+    public Tester get(int id) {
+        for(Tester tester: list){
+            if(id == tester.getId()){
+                return tester;
+            }
+        }
+        throw new IllegalArgumentException("Не найдено ни одной записи Tester с Id " + id);
+    }
+
+    @Override
     public ArrayList<Tester> getListOfFree() {
         ArrayList<Tester> freeTester = new ArrayList<>();
 
