@@ -12,15 +12,15 @@ public class TaskService {
     }
 
     public void createTask(int id, String summary) throws IllegalStateException {
-        if(summary == null || summary.isEmpty()){
+        if (summary == null || summary.isEmpty()) {
             throw new IllegalStateException("Входные данные не валидны");
         }
         arrayList.add(new Task(id, summary));
     }
 
     public Task getTask(String summary) throws IllegalStateException {
-        for (Task n: arrayList) {
-            if(summary.equalsIgnoreCase(n.summary)) {
+        for (Task n : arrayList) {
+            if (summary.equalsIgnoreCase(n.summary)) {
                 return n;
             }
         }
@@ -29,8 +29,8 @@ public class TaskService {
 
     public ArrayList<Task> getTasksForDeveloping() {
         ArrayList<Task> list = new ArrayList<>();
-        for (Task n: arrayList) {
-            if(!n.isDeveloped) {
+        for (Task n : arrayList) {
+            if (!n.isDeveloped) {
                 list.add(n);
             }
         }
