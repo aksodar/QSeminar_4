@@ -1,24 +1,28 @@
 package ru.sberbank.service;
 
+import ru.sberbank.data.Developer;
 import ru.sberbank.data.Tester;
 
 import java.util.ArrayList;
 
-public class TesterService extends AbstractStorage implements DataServise<Tester>{
+public class TesterService extends AbstractStorage<Tester> implements DataServise<Tester>{
     ArrayList<Tester> list;
 
     public TesterService() {
+
         super();
     }
 
-    public void createTester(int id, String firstName, String secondName) {
+    @Override
+    public void create(int id, String firstName, String secondName) {
         if((firstName == null || firstName.isEmpty()) || (secondName == null || secondName.isEmpty())) {
             throw new IllegalStateException("Тестер не создан");
         }
         list.add(new Tester(id, firstName, secondName));
     }
 
-    public Tester getTester(String firstName, String secondName) {
+    @Override
+    public Tester get(String firstName, String secondName) {
         for (Tester t: list)  {
             if(firstName.equalsIgnoreCase(t.getFirstName()) && secondName.equalsIgnoreCase(t.getSecondName())) {
                 return t;
@@ -27,7 +31,9 @@ public class TesterService extends AbstractStorage implements DataServise<Tester
         throw new IllegalStateException("Тестер не найден");
     }
 
-    public ArrayList getFreeTesters() {
+
+    @Override
+    public ArrayList<Tester> getListOfFree() {
         ArrayList<Tester> freeTester = new ArrayList<>();
         for (Tester n: list) {
             if(n.isFree()) {
@@ -41,22 +47,12 @@ public class TesterService extends AbstractStorage implements DataServise<Tester
     }
 
     @Override
-    public void create(int id, String firstName, String secondName) {
-
-    }
-
-    @Override
-    public Tester get(String firstName, String secondName) {
-        return null;
-    }
-
-    @Override
     public Tester get(int id) {
-        return null;
-    }
-
-    @Override
-    public ArrayList<Tester> getListOfFree() {
+        for (Tester m: list) {
+            if(m.getId() == id) {
+                return  m;
+            }
+        }
         return null;
     }
 }

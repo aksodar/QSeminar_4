@@ -28,6 +28,11 @@ public class DeveloperService extends AbstractStorage<Developer> implements  Dat
 
     @Override
     public Developer get(int id) {
+        for (Developer n: list){
+            if(n.getId() == id){
+                return n;
+            }
+        }
         return null;
     }
 
